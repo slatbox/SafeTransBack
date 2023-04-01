@@ -17,13 +17,19 @@ class UserDB:
     def createUser(self,user_name,password):
         salt = str(random.random())
         passhash = self.jm_md5(salt + password)
-        self.cur.execute("INSERT INTO users (name,passhash,salt) VALUES (?,?,?)",(user_name,passhash,salt))
+        self.cur.execute(
+            "INSERT INTO users (name,passhash,salt) VALUES (?,?,?)",
+            (user_name,passhash,salt)
+        )
         self.con.commit()
         print(self.cur.fetchall())
     
     def verify(self,user_name,password):
         # self.cur = self.con.cursor()
-        self.cur.execute("select * from users where name=:user_name",{'user_name':user_name})
+        self.cur.execute(
+            "select * from users where name=:user_name",
+            {'user_name':user_name}
+        )
         self.con.commit()
         user_name,r_passhash,salt = self.cur.fetchall()[0]
         passhash = self.jm_md5(salt + password)

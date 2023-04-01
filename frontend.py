@@ -32,7 +32,7 @@ class Frontend:
             [sg.Button('上传'), sg.Button('下载'),sg.Button('刷新')],
         ]
         # 创建GUI窗口
-        window = sg.Window('建议安全传输客户端', layout)
+        window = sg.Window('简易安全传输客户端', layout)
         # 主循环
         while True:
             event, values = window.read()
